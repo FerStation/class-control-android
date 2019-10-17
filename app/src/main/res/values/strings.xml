@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ClassControl</string>
+
+    <!-- MainActivity -->
+    <string name="add_lessons">Adicionar\nAulas</string>
+    <string name="view_classes">Visualizar\nAulas</string>
+    <string name="manage_classroom">Gerenciar\nSalas</string>
+    <string name="profile_image">Imagem de perfil</string>
 </resources>
