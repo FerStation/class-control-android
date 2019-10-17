@@ -72,7 +72,6 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
-            android:text="Novembro/2019"
             android:textColor="#FFFFFF" />
 
         <TextView
@@ -87,13 +86,13 @@
             android:textStyle="bold" />
 
         <LinearLayout
-            android:id="@+id/linearLayoutHistoric"
+            android:id="@+id/linearLayoutNextMonths"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linearLayoutHistoric1"
+                android:id="@+id/linearLayoutNextMonths1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -101,7 +100,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textViewMonthHistoric1"
+                    android:id="@+id/textViewNextMonth1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
@@ -110,7 +109,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/textViewValueHistoric1"
+                    android:id="@+id/textViewValueNextMonth1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -128,7 +127,7 @@
                 android:background="#FFFFFF" />
 
             <LinearLayout
-                android:id="@+id/linearLayoutHistoric2"
+                android:id="@+id/linearLayoutNextMonth2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
 
@@ -137,7 +136,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textViewMonthHistoric2"
+                    android:id="@+id/textViewNextMonth2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -146,7 +145,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/textViewValueHistoric2"
+                    android:id="@+id/textViewValueNextMonth2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -164,7 +163,7 @@
                 android:background="#FFFFFF" />
 
             <LinearLayout
-                android:id="@+id/linearLayoutHistoric3"
+                android:id="@+id/linearLayoutNextMonth3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -172,7 +171,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textViewMonthHistoric3"
+                    android:id="@+id/textViewNextMonth3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -181,7 +180,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/textViewValueHistoric3"
+                    android:id="@+id/textViewValueNextMonth3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
