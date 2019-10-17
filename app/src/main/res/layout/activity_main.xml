@@ -38,8 +38,7 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:fontFamily="sans-serif"
-            android:drawableTop=""/>
+            app:fontFamily="sans-serif" />
     </LinearLayout>
 
     <LinearLayout
@@ -63,9 +62,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
-            android:max="100"
             android:minHeight="16dip"
-            android:progress="50"
             android:scaleY="3" />
 
         <TextView
@@ -123,7 +120,7 @@
             </LinearLayout>
 
             <View
-                android:id="@+id/textView5678"
+                android:id="@+id/divider1"
                 android:layout_width="1dp"
                 android:layout_height="fill_parent"
                 android:layout_marginTop="20dp"
@@ -159,7 +156,7 @@
             </LinearLayout>
 
             <View
-                android:id="@+id/textView1234"
+                android:id="@+id/divider2"
                 android:layout_width="1dp"
                 android:layout_height="fill_parent"
                 android:layout_marginTop="20dp"
