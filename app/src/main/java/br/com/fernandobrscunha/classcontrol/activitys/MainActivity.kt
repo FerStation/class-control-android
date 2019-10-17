@@ -1,27 +1,28 @@
-package br.com.fernandobrscunha.classcontrol
+package br.com.fernandobrscunha.classcontrol.activitys
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ProgressBar
-import kotlinx.android.synthetic.main.activity_main.*
-import java.time.YearMonth
 import java.util.*
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.widget.Button
 import android.widget.TextView
+import br.com.fernandobrscunha.classcontrol.R
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var progressBar: ProgressBar
+
     private lateinit var textViewMonth: TextView
     private lateinit var textViewNextMonth1: TextView
     private lateinit var textViewNextMonth2: TextView
     private lateinit var textViewNextMonth3: TextView
+
+    private lateinit var buttonManageClassRoom: Button
+    private lateinit var buttonViewClasses: Button
+    private lateinit var buttonAddClasses: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +30,15 @@ class MainActivity : AppCompatActivity() {
 
         //link xml
         progressBar =  findViewById(R.id.progressBarMonth)
+
         textViewMonth = findViewById(R.id.textViewMonth)
         textViewNextMonth1 = findViewById(R.id.textViewNextMonth1)
         textViewNextMonth2 = findViewById(R.id.textViewNextMonth2)
         textViewNextMonth3 = findViewById(R.id.textViewNextMonth3)
+
+        buttonManageClassRoom = findViewById(R.id.buttonManageClassRoom)
+        buttonViewClasses = findViewById(R.id.buttonViewClasses)
+        buttonAddClasses = findViewById(R.id.buttonAddClasses)
 
         //initial values
         textViewMonth.text = getMonthName()+"/"+Calendar.getInstance().get(Calendar.YEAR)
@@ -40,7 +46,24 @@ class MainActivity : AppCompatActivity() {
         textViewNextMonth2.text = addMonth(2).substring(0,3).toUpperCase()
         textViewNextMonth3.text = addMonth(3).substring(0,3).toUpperCase()
 
+        //animations
         progressBarAnimation()
+
+        //events
+        buttonManageClassRoom.setOnClickListener{
+            val intent = Intent(this, SchoolListActivity::class.java)
+            startActivity(intent)
+        }
+
+        buttonViewClasses.setOnClickListener{
+            //val intent = Intent(this, ClassListActivity::class.java)
+            //startActivity(intent)
+        }
+
+        buttonAddClasses.setOnClickListener {
+            //val intent = Intent(this, ClassActivity::class.java)
+            //startActivity(intent)
+        }
 
     }
 

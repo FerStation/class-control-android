@@ -2,8 +2,22 @@
     <string name="app_name">ClassControl</string>
 
     <!-- MainActivity -->
-    <string name="add_lessons">Adicionar\nAulas</string>
+    <string name="add_classes">Adicionar\nAulas</string>
     <string name="view_classes">Visualizar\nAulas</string>
     <string name="manage_classroom">Gerenciar\nSalas</string>
     <string name="profile_image">Imagem de perfil</string>
+
+    <!-- SchoolActivity -->
+    <array name="school_types">
+        <item>Estadual</item>
+        <item>Municipal</item>
+        <item>Particular</item>
+        <item>Outros</item>
+    </array>
+
+    <string name="title_activity_class_room_list">ClassRoomListActivity</string>
+    <string name="title_activity_class_list">ClassListActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="title_activity_school_list">SchoolListActivity</string>
 </resources>

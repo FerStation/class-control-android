@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#83299c"
-    tools:context=".MainActivity">
+    tools:context=".activitys.MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayoutProfile"
@@ -72,6 +72,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
+            android:text="Novembro/2019"
             android:textColor="#FFFFFF" />
 
         <TextView
@@ -205,7 +206,8 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/buttonAddLessons"
+            android:id="@+id/buttonAddClasses"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -214,9 +216,8 @@
             android:drawableTop="@drawable/ic_add"
             android:paddingTop="25dp"
             android:paddingBottom="25dp"
-            android:text="@string/add_lessons"
-            android:textColor="#FFFFFF"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:text="@string/add_classes"
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/buttonViewClasses"

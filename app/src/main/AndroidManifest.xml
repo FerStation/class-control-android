@@ -9,7 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".SchoolActivity"></activity>
+        <activity
+            android:name=".activitys.SchoolListActivity"
+            android:label="@string/title_activity_school_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ClassActivity" />
+        <activity android:name=".ClassRoomActivity" />
+        <activity
+            android:name=".ClassListActivity"
+            android:label="@string/title_activity_class_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activitys.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
