@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         //animations
         progressBarAnimation()
 
-        //events teste
+        //events
         buttonManageClassRoom.setOnClickListener{
             val intent = Intent(this, SchoolListActivity::class.java)
             startActivity(intent)
