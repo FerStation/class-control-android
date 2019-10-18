@@ -2,10 +2,8 @@ package br.com.fernandobrscunha.classcontrol.activitys
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import br.com.fernandobrscunha.classcontrol.R
-import br.com.fernandobrscunha.classcontrol.SchoolActivity
 
 import kotlinx.android.synthetic.main.activity_school_list.*
 

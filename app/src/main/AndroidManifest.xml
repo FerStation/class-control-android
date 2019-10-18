@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.fernandobrscunha.classcontrol">
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,18 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SchoolActivity"></activity>
+        <activity android:name=".LoginActivity" android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activitys.SchoolActivity" />
         <activity
             android:name=".activitys.SchoolListActivity"
             android:label="@string/title_activity_school_list"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ClassActivity" />
-        <activity android:name=".ClassRoomActivity" />
-        <activity
-            android:name=".ClassListActivity"
-            android:label="@string/title_activity_class_list"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activitys.MainActivity">
+
+        <activity android:name=".activitys.MainActivity" android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

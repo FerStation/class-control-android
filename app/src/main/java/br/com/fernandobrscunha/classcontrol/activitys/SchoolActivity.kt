@@ -1,7 +1,8 @@
-package br.com.fernandobrscunha.classcontrol
+package br.com.fernandobrscunha.classcontrol.activitys
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import br.com.fernandobrscunha.classcontrol.R
 
 class SchoolActivity : AppCompatActivity() {
 
