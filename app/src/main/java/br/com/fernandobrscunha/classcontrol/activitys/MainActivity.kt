@@ -9,7 +9,6 @@ import android.widget.ProgressBar
 import java.util.*
 import android.widget.Button
 import android.widget.TextView
-import br.com.fernandobrscunha.classcontrol.LoginActivity
 import br.com.fernandobrscunha.classcontrol.R
 import com.google.firebase.auth.FirebaseAuth
 
@@ -83,6 +82,8 @@ class MainActivity : AppCompatActivity() {
         //FirebaseAuth.getInstance().signOut()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
+
+        //Log.d("logou",auth.currentUser.u)
 
         if(currentUser === null){
             val intent = Intent(this, LoginActivity::class.java)
