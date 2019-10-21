@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
 
-        //Log.d("logou",auth.currentUser.u)
+        Log.d("logou",""+auth.currentUser)
 
         if(currentUser === null){
             val intent = Intent(this, LoginActivity::class.java)

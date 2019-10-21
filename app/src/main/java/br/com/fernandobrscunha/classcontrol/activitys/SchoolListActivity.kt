@@ -42,14 +42,20 @@ class SchoolListActivity : AppCompatActivity() {
         list = findViewById(R.id.listViewSchools)
 
         var list2 = mutableListOf<School>()
-        //list2.add(School("123","teste","Mun",0.0))
+
+        //Adpter view and
         val adapter4 = MyListAdpter(this, R.layout.school_item, list2)
         list.adapter = adapter4
         list.setOnItemClickListener { parent, view, position, id ->
 
             //Toast.makeText(this, "Clicked item :" + " " + position, Toast.LENGTH_SHORT).show()
             val uid = auth.currentUser!!.uid
-            database.child("users").child(uid).child("schools").child(schoolsIds[position]).setValue(null)
+
+            val intent = Intent(this, SchoolActivity::class.java)
+            intent.putExtra("SCHOOL_ID",schoolsIds[position])
+            startActivity(intent)
+
+            //database.child("users").child(uid).child("schools").child(schoolsIds[position]).setValue(null)
         }
 
         auth = FirebaseAuth.getInstance()
@@ -70,10 +76,11 @@ class SchoolListActivity : AppCompatActivity() {
 
 
         fab.setOnClickListener { view ->
-           // val intent = Intent(this, SchoolActivity::class.java)
-           // startActivity(intent)
+           val intent = Intent(this, SchoolActivity::class.java)
+            intent.putExtra("oi","oi")
+            startActivity(intent)
             //Show Dialog here to add new Item
-            addNewItemDialog()
+           // addNewItemDialog()
         }
 
         val postListener = object : ValueEventListener {
@@ -162,7 +169,7 @@ class SchoolListActivity : AppCompatActivity() {
         alert.setPositiveButton("Submit") { dialog, positiveButton ->
 
             val uid = auth.currentUser!!.uid
-            val shcool = School(uid,"nicolau","mu",12.50)
+            val shcool = School("nicolau","mu",12.50)
 
             //adicionar registros
             database.child("users").child(uid).child("schools").push().setValue(shcool)

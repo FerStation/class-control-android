@@ -8,6 +8,10 @@
     <string name="profile_image">Imagem de perfil</string>
 
     <!-- SchoolActivity -->
+    <string name="message_school_add_success">Escola cadastrada com sucesso!</string>
+    <string name="message_school_update_success">Escola alterada com sucesso!</string>
+    <string name="message_school_delete_success">Escola Excluída com sucesso!</string>
+
     <array name="school_types">
         <item>Estadual</item>
         <item>Municipal</item>
