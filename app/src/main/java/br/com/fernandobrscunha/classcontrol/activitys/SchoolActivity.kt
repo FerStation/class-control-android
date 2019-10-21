@@ -1,5 +1,6 @@
 package br.com.fernandobrscunha.classcontrol.activitys
 
+import android.graphics.drawable.Icon
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,8 +13,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import android.widget.ArrayAdapter
-
-
+import androidx.appcompat.app.AlertDialog
 
 
 class SchoolActivity : AppCompatActivity() {
@@ -112,9 +112,17 @@ class SchoolActivity : AppCompatActivity() {
 
     private fun removeSchool(schoolId: String) {
 
-        schoolService.delete(schoolId)
-        Toast.makeText(applicationContext,getString(R.string.message_school_delete_success),Toast.LENGTH_SHORT).show()
-        finish()
+        val alert = AlertDialog.Builder(this)
+        alert.setTitle("Deseja realmente excluir essa escola?")
+        alert.setMessage("ATENÇÃO ao excluir uma escola, todoas as aulas dessa escola também serão escluidas")
+        alert.setPositiveButton("SIM") { dialog, positiveButton ->
+
+            schoolService.delete(schoolId)
+            Toast.makeText(applicationContext,getString(R.string.message_school_delete_success),Toast.LENGTH_SHORT).show()
+            finish()
+        }
+        alert.setNegativeButton("Não"){dialog, positiveButton -> null}
+        alert.show()
     }
 
 

@@ -10,6 +10,7 @@ import br.com.fernandobrscunha.classcontrol.MyListAdpter
 import br.com.fernandobrscunha.classcontrol.R
 import br.com.fernandobrscunha.classcontrol.models.School
 import br.com.fernandobrscunha.classcontrol.models.User
+import br.com.fernandobrscunha.classcontrol.services.SchoolService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -17,167 +18,96 @@ import kotlinx.android.synthetic.main.activity_school_list.*
 
 import com.google.firebase.database.DataSnapshot
 
-
-
-
 class SchoolListActivity : AppCompatActivity() {
 
-    lateinit var list:ListView
-
-    private lateinit var auth: FirebaseAuth
-    private lateinit var database: DatabaseReference
-
-    private lateinit var postKey: String
-    private lateinit var schoolsReference: DatabaseReference
-
-    val listitem: MutableList<String> = ArrayList()
-
+    private val schoolService = SchoolService()
     private val schoolsIds = ArrayList<String>()
+    private var schoolsList = mutableListOf<School>()
+
+    private lateinit var listViewSchools: ListView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_school_list)
         setSupportActionBar(toolbar)
 
-        list = findViewById(R.id.listViewSchools)
+        listViewSchools = findViewById(R.id.listViewSchools)
 
-        var list2 = mutableListOf<School>()
 
-        //Adpter view and
-        val adapter4 = MyListAdpter(this, R.layout.school_item, list2)
-        list.adapter = adapter4
-        list.setOnItemClickListener { parent, view, position, id ->
+        //Set adapter
+        val adapterSchools = MyListAdpter(this, R.layout.school_item, schoolsList)
+        listViewSchools.adapter = adapterSchools
 
-            //Toast.makeText(this, "Clicked item :" + " " + position, Toast.LENGTH_SHORT).show()
-            val uid = auth.currentUser!!.uid
+
+        // Event List
+        fab.setOnClickListener { view ->
+           val intent = Intent(this, SchoolActivity::class.java)
+            startActivity(intent)
+        }
+
+        listViewSchools.setOnItemClickListener { parent, view, position, id ->
 
             val intent = Intent(this, SchoolActivity::class.java)
             intent.putExtra("SCHOOL_ID",schoolsIds[position])
             startActivity(intent)
 
-            //database.child("users").child(uid).child("schools").child(schoolsIds[position]).setValue(null)
         }
 
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().reference
-
-
-
-        val uid = auth.currentUser!!.uid
-        val user = User("Fernando", "ferstation@gmail.com")
-        //database.child("users").child(uid).setValue(user)
-
-        schoolsReference = FirebaseDatabase.getInstance().reference
-            .child("users").child(uid).child("schools")
-
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listitem)
-        //list.adapter = adapter
-
-
-
-        fab.setOnClickListener { view ->
-           val intent = Intent(this, SchoolActivity::class.java)
-            intent.putExtra("oi","oi")
-            startActivity(intent)
-            //Show Dialog here to add new Item
-           // addNewItemDialog()
-        }
-
-        val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-                val post = dataSnapshot.getValue(School::class.java)
-
-                for (snapshot in dataSnapshot.children) {
-                    val user = snapshot.getValue(School::class.java)
-                    //snapshot.ke
-
-                    //aqui está repetindo a lista
-                    //Toast.makeText(applicationContext,"oi"+user!!.name,Toast.LENGTH_LONG).show()
-                    list.adapter = null
-                    listitem.add(user!!.name.toString())
-                    list.adapter = adapter
-                }
-
-
-
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w("error", "loadPost:onCancelled", databaseError.toException())
-                // ...
-            }
-        }
-        //schoolsReference.addValueEventListener(postListener)
 
         val childEventListener = object : ChildEventListener {
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
 
-                // A new comment has been added, add it to the displayed list
-                val comment = dataSnapshot.getValue(School::class.java)
+                // A new school has been added, add it to the displayed list
+                val school = dataSnapshot.getValue(School::class.java)
 
                 schoolsIds.add(dataSnapshot.key!!)
-                list2.add(comment!!)
+                schoolsList.add(school!!)
 
 
-                adapter4.notifyDataSetChanged()
-                // ...
-            }
+                adapterSchools.notifyDataSetChanged()
+
+            }//end onChildAdded
 
             override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
 
-                // ...
-            }
-
-            override fun onChildRemoved(dataSnapshot: DataSnapshot) {
+                val newSchool = dataSnapshot.getValue(School::class.java)
                 val schoolKey = dataSnapshot.key
                 val schoolIndex = schoolsIds.indexOf(schoolKey)
+
+                schoolsList[schoolIndex] = newSchool!!
+
+                // Update the RecyclerView
+                adapterSchools.notifyDataSetChanged()
+
+            }//end onChildChanged
+
+            override fun onChildRemoved(dataSnapshot: DataSnapshot) {
+
+                val schoolKey = dataSnapshot.key
+                val schoolIndex = schoolsIds.indexOf(schoolKey)
+
                 if (schoolIndex > -1) {
-                    // Remove data from the list
+
+                    // Remove school from list
                     schoolsIds.removeAt(schoolIndex)
-                    list2.removeAt(schoolIndex)
+                    schoolsList.removeAt(schoolIndex)
 
                     // Update the RecyclerView
-                    adapter4.notifyDataSetChanged()
+                    adapterSchools.notifyDataSetChanged()
                 }
-                // ...
-            }
 
-            override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {
+            }//end onChildRemoved
 
-
-                // ...
-            }
+            override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {}
 
             override fun onCancelled(databaseError: DatabaseError) {
                 Log.w("dd", "postComments:onCancelled", databaseError.toException())
-                Toast.makeText(applicationContext, "Failed to load comments.",
+                Toast.makeText(applicationContext, "Failed to load schools.",
                     Toast.LENGTH_SHORT).show()
             }
         }
-        schoolsReference.addChildEventListener(childEventListener)
+        schoolService.showAll().addChildEventListener(childEventListener)
 
-    }
-
-    private fun addNewItemDialog() {
-        val alert = AlertDialog.Builder(this)
-        val itemEditText = EditText(this)
-        alert.setMessage("Add New Item")
-        alert.setTitle("Enter To Do Item Text")
-        alert.setView(itemEditText)
-        alert.setPositiveButton("Submit") { dialog, positiveButton ->
-
-            val uid = auth.currentUser!!.uid
-            val shcool = School("nicolau","mu",12.50)
-
-            //adicionar registros
-            database.child("users").child(uid).child("schools").push().setValue(shcool)
-
-            //excluir um ou vários registros
-            //database.child("users").child(uid).child("schools").setValue(null)
-        }
-        alert.show()
     }
 
 }
