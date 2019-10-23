@@ -70,8 +70,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonAddClasses.setOnClickListener {
-            //val intent = Intent(this, ClassActivity::class.java)
-            //startActivity(intent)
+            val intent = Intent(this, ClassActivity::class.java)
+            startActivity(intent)
         }
 
     }
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
     private fun progressBarAnimation() {
         progressBar.max = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH)
 
-        var progressValue: Int = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        val progressValue: Int = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         ObjectAnimator.ofInt(progressBar, "progress",progressValue).setDuration(500).start()
     }
 

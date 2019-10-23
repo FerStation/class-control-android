@@ -24,7 +24,7 @@ class SchoolService {
 
     fun showAll(): DatabaseReference {
         return database
-    }
+    }//end showAll
 
     fun show(schoolId: String): DatabaseReference {
         return database.child(schoolId)

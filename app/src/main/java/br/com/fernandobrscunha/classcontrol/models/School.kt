@@ -17,4 +17,8 @@ data class School (
             "baseValue" to baseValue
         )
     }
+
+    override fun toString(): String {
+        return name.toString()
+    }
 }
