@@ -19,6 +19,15 @@
         <item>Outros</item>
     </array>
 
+    <!--test -->
+    <array name="test">
+        <item>x1</item>
+        <item>x2</item>
+        <item>x3</item>
+        <item>x4</item>
+        <item>x5</item>
+    </array>
+
     <string name="title_activity_class_room_list">ClassRoomListActivity</string>
     <string name="title_activity_class_list">ClassListActivity</string>
     <string name="tab_text_1">Tab 1</string>

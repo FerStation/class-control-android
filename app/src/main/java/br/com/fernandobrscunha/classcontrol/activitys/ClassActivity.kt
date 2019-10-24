@@ -1,38 +1,67 @@
 package br.com.fernandobrscunha.classcontrol.activitys
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Spinner
-import android.widget.Toast
 import br.com.fernandobrscunha.classcontrol.R
 import br.com.fernandobrscunha.classcontrol.models.School
 import br.com.fernandobrscunha.classcontrol.services.SchoolService
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import android.widget.*
+import br.com.fernandobrscunha.classcontrol.models.Class
+import br.com.fernandobrscunha.classcontrol.services.ClassService
+import kotlinx.android.synthetic.main.activity_class.*
+import java.util.*
+import kotlin.collections.ArrayList
 import android.widget.ArrayAdapter
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.view.View
-import android.widget.AdapterView
+
+
+
 
 
 class ClassActivity : AppCompatActivity() {
 
-    private lateinit var spinnerSchools: Spinner
-
     private val schoolService = SchoolService()
     private val schoolsIds = ArrayList<String>()
     private var schoolsList = mutableListOf<School>()
+
+    private lateinit var spinnerSchools: Spinner
+    private lateinit var classValue: EditText
+    private lateinit var classDate: Button
+    private lateinit var paymentDate: Button
+    private lateinit var comments: EditText
+
+    private lateinit var buttonClassSave: Button
+
+    private lateinit var classService: ClassService
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_class)
 
         spinnerSchools = findViewById(R.id.spinnerSchools)
+
+        classValue = findViewById(R.id.editTextClassValue)
+        classValue .setText("15.00")
+
+
+        classDate = findViewById(R.id.buttonClassDate)
+        classDate.setText("24/10/2019")
+        classDate.setOnClickListener { showDatePickerDialog() }
+
+        paymentDate = findViewById(R.id.buttonPaymentDate)
+        paymentDate.setText("NOV/2019")
+
+        comments = findViewById(R.id.editTextComments)
+        comments.setText("Aula de matematica, substitucao da prof Fulana")
+
+        buttonClassSave = findViewById(R.id.buttonClassSave)
+        buttonClassSave.setOnClickListener { saveClass() }
+
 
         val adapter = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, schoolsList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -85,6 +114,39 @@ class ClassActivity : AppCompatActivity() {
             }
         }
         schoolService.showAll().addChildEventListener(childEventListener)
+    }
+
+    private fun saveClass(){
+
+        val classObject = Class(
+            editTextClassValue.text.toString().toDouble(),
+            5,
+            Date(),
+            Date(),
+            editTextComments.text.toString()
+        )
+        showDatePickerDialog()
+        //classService = ClassService(schoolsIds[spinnerSchools.selectedItemPosition])
+        //classService.store(classObject)
+    }
+
+    private fun showDatePickerDialog(){
+        val date = Calendar.getInstance()
+        val datePickerDialog = DatePickerDialog(
+            this,
+            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+
+            // Display Selected date in textbox
+            buttonClassDate.setText("$dayOfMonth/$monthOfYear/$year")
+
+            },
+            date.get(Calendar.YEAR),
+            date.get(Calendar.MONTH),
+            date.get(Calendar.DAY_OF_MONTH))
+
+        datePickerDialog.show()
+
+        datePickerDialog.show()
     }
 }
 

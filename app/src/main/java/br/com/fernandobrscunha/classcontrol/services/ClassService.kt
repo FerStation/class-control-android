@@ -14,7 +14,7 @@ class ClassService(shcoolId: String) {
 
     init {
         uid = auth.currentUser!!.uid
-        database = FirebaseDatabase.getInstance().reference.child("users/$uid/schools/$shcoolId")
+        database = FirebaseDatabase.getInstance().reference.child("users/$uid/schools/$shcoolId/classes")
     }
 
     fun store(classObject: Class){
